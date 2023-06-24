@@ -1,0 +1,88 @@
+
+<h1 class="page-title" style="color: #17789e;">Reporte Venta</h1>
+<mat-card class="card" style="margin: 20px 40px 40px 40px">
+
+  <mat-card-content class="dashboard-card-content">
+
+    <form class="example-form" [formGroup]="formGroup" (ngSubmit)="onSubmitForm1()">
+      <mat-grid-list cols="4" rowHeight="80px">
+
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Fecha Inicio</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="fechaInicio" autocomplete="off">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Fecha Fin</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="fechaFin" autocomplete="off">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <button mat-raised-button color="primary"  class="btn btn-info" style="width: 75%; margin-bottom: 15px;" ><mat-icon>search</mat-icon> Buscar</button>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+      
+        <mat-form-field appearance="standard" class="filter-field">
+          <mat-label>Búsqueda (Cualquier campo)</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Total" #input>
+        </mat-form-field>
+    </form>
+
+    <div class="mat-elevation-z2" style="margin-top:15px">
+         <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="fechaRegistro">
+          <th mat-header-cell *matHeaderCellDef> Fecha Registro </th>
+          <td mat-cell *matCellDef="let element"> {{element.fechaRegistro }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="numero">
+          <th mat-header-cell *matHeaderCellDef> Numero de Venta  </th>
+          <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaReserva">
+          <th mat-header-cell *matHeaderCellDef> Fecha Cita </th>
+          <td mat-cell *matCellDef="let element"> {{element.fechaReserva}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="odontologo">
+          <th mat-header-cell *matHeaderCellDef> Total </th>
+          <td mat-cell *matCellDef="let element"> {{element.odontologo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="paciente">
+          <th mat-header-cell *matHeaderCellDef> Producto </th>
+          <td mat-cell *matCellDef="let element"> {{element.paciente}} </td>
+        </ng-container>    
+
+        <ng-container matColumnDef="servicio">
+          <th mat-header-cell *matHeaderCellDef> Precio </th>
+          <td mat-cell *matCellDef="let element"> {{element.servicio}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+
+    </div>
+
+  </mat-card-content>
+
+</mat-card>
